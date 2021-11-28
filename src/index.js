@@ -20,7 +20,7 @@ dogForm.addEventListener('submit', e => {
     let updatedDogBreed = dogForm.children[1].value
     let updatedDogSex = dogForm.children[2].value
     let dogId = dogForm.dataset.id
-
+    console.log(dogId)
     let updatedDogData  = {
         "name": updatedDogName,
         "breed": updatedDogBreed,
@@ -34,7 +34,17 @@ dogForm.addEventListener('submit', e => {
         },
         body: JSON.stringify(updatedDogData)
     })
-    console.log(updatedDogData)
+    .then(resp => resp.json())
+    .then(() => {
+        tableHeader.innerHTML = `             <tr class='padding'>
+              <th class='padding center'>Name</th>
+              <th class='padding center'>Breed</th>
+              <th class='padding center'>Sex</th>
+              <th class='padding center'>Edit Dog</th>
+            </tr>
+`
+        loadDogs()
+    })
 })
 
 
